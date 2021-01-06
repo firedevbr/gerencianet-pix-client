@@ -1,7 +1,7 @@
-FROM php:8.0-apache
+FROM php:7.4-apache
 
 ENV DEBUG="0" \
-    PHP_VERSION="8.0" \
+    PHP_VERSION="7.4" \
     APP_DIR="/app" \
     PUBLIC_DIR="public" \
     TZ="America/Sao_Paulo" \

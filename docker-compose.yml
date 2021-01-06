@@ -3,7 +3,7 @@ services:
   web:
     build:
       context: .
-    image: registry.gitlab.com/firedevbr/baseapp:8.0
+    image: registry.gitlab.com/firedevbr/baseapp:7.4
     volumes:
       - "./:/app/"
     ports:
