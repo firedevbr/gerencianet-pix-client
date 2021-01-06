@@ -1,0 +1,21 @@
+{
+    "sandbox": true,
+    "chave": "chavepix@email.com",
+    "recebedor": "Nome do recebedor",
+    "homologacao": {
+        "nome_certificado": "developmentCertificate.pem",
+        "client_id": "Client_Id_...",
+        "client_secret": "Client_Secret_...",
+        "pix_url_auth": "https://api-pix-h.gerencianet.com.br/oauth/token",
+        "pix_url_cob": "https://api-pix-h.gerencianet.com.br/v2/cob",
+        "pix_url": "https://api-pix-h.gerencianet.com.br/v2/pix"
+    },
+    "producao": {
+        "nome_certificado": "productionCertificate.pem",
+        "client_id": "Client_Id_...",
+        "client_secret": "Client_Secret_...",
+        "pix_url_auth": "https://api-pix.gerencianet.com.br/oauth/token",
+        "pix_url_cob": "https://api-pix.gerencianet.com.br/v2/cob",
+        "pix_url": "https://api-pix.gerencianet.com.br/v2/pix"
+    }
+}

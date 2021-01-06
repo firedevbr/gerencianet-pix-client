@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+PHP_CONF_DIR="${PHP_INI_DIR}/conf.d"
+PHP_CONF_XDEBUG="${PHP_CONF_DIR}/docker-php-ext-xdebug.ini"
+PHP_CONF_OPCACHE="${PHP_CONF_DIR}/docker-php-ext-opcache.ini"
+PHP_CONF_TZONE="${PHP_CONF_DIR}/tzone.ini"
+
+echo "date.timezone = ${TZ}" > ${PHP_CONF_TZONE}
+
+[ -f "$PHP_CONF_XDEBUG" ] && rm $PHP_CONF_XDEBUG
+[ -f "$PHP_CONF_OPCACHE" ] && rm $PHP_CONF_OPCACHE
+
+[ "${ENABLE_XDEBUG}" = "1" ]  && docker-php-ext-enable xdebug
+[ "${ENABLE_OPCACHE}" = "1" ] && docker-php-ext-enable opcache
+
+composer dump-autoload --quiet
+
+if [ "${1#-}" != "$1" ]; then
+	set -- apache2-foreground "$@"
+fi
+
+exec "$@"

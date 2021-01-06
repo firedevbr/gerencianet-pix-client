@@ -1,0 +1,21 @@
+{
+  "name": "firedevbr/gerencianet-pix-client",
+  "description": "Client para comunicação com a API PIX gerencianet",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Firedev\\Pix\\Gerencianet\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Firedev",
+      "email": "contato@firedev.com.br"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*"
+  }
+}
