@@ -3,15 +3,10 @@
 
 namespace Firedev\Pix\Gerencianet;
 
-
-use Firedev\Pix\Gerencianet\Exception\BuscaAccessTokenException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use League\OAuth2\Client\Token\AccessToken;
-use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class Client
 {
@@ -133,9 +128,9 @@ class Client
         return $this->modo === self::MODO_PRODUCAO;
     }
 
-    public function buscaDadosCobranca(string $chaveCobranca): array
+    public function buscaDadosCobranca(string $chaveCobranca): Cobranca
     {
         $response = $this->httpClient->request('GET', 'cob/' . $chaveCobranca);
-        return json_decode($response->getBody()->getContents(), true);
+        return new Cobranca(json_decode($response->getBody()->getContents(), true));
     }
 }
