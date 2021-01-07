@@ -133,4 +133,29 @@ class Client
         $response = $this->httpClient->request('GET', 'cob/' . $chaveCobranca);
         return new Cobranca(json_decode($response->getBody()->getContents(), true));
     }
+
+    public function geraNovaCobranca($idDeTransacao = null)
+    {
+        if (is_null($idDeTransacao)) {
+            $idDeTransacao = $this->geraIdCobrancaAleatoria();
+        }
+
+    }
+
+    public function geraIdCobrancaAleatoria($tipo = "dinamico"): string
+    {
+        /*
+         # Esta rotina gera um txID de forma aleatória, atendendo à regex `[a-zA-Z0-9]{26,35}$` caso o QR Code seja dinâmico, e à regex [a-zA-Z0-9]{1,25} caso seja estático, conforme padrão bacen
+         */
+
+        $quantidade = ($tipo === "dinamico") ? 35 : 25;
+
+        for (
+            $id = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') - 1;
+            $i != $quantidade;
+            $x = rand(0, $z), $id .= $a{
+        $x}, $i++
+        );
+        return $id;
+    }
 }
