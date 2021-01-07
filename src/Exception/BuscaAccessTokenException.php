@@ -4,7 +4,7 @@
 namespace Firedev\Pix\Gerencianet\Exception;
 
 
-class BuscaAccessTokenException
+class BuscaAccessTokenException extends \Exception
 {
 
 }
