@@ -83,4 +83,92 @@ class Cobranca
         $this->mensagemDaCobranca = $payloadCobranca['solicitacaoPagador'];
         $this->payloadOriginal    = $payloadCobranca;
     }
+
+    /**
+     * @return string
+     */
+    public function getIdTransacao(): string
+    {
+        return $this->idTransacao;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataCriacao(): \DateTime
+    {
+        return $this->dataCriacao;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDataExpiracao(): \DateTime
+    {
+        return $this->dataExpiracao;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVersaoRevisao(): int
+    {
+        return $this->versaoRevisao;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdCobranca(): int
+    {
+        return $this->idCobranca;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrlPayloadQrCode()
+    {
+        return $this->urlPayloadQrCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return float
+     */
+    public function getValorOriginal(): float
+    {
+        return $this->valorOriginal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChaveCobrador(): string
+    {
+        return $this->chaveCobrador;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMensagemDaCobranca(): string
+    {
+        return $this->mensagemDaCobranca;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPayloadOriginal(): array
+    {
+        return $this->payloadOriginal;
+    }
 }
