@@ -6,6 +6,8 @@ namespace Firedev\Pix\Gerencianet;
 
 use Firedev\Pix\Gerencianet\Exception\BuscaAccessTokenException;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -77,10 +79,23 @@ class Client
      */
     public function ativaModoProducao(): void
     {
+        $handler = new OauthHandler(
+            $this->caminhoArquivoCertificado,
+            $this->clientId,
+            $this->clientSecret,
+            $this->cache,
+            $this->infoAmbientes['producao']['pix_url_auth']
+        );
+
+        $stack = HandlerStack::create();
+        $stack->push(Middleware::mapRequest($handler));
+
         $this->httpClient = new \GuzzleHttp\Client([
             'base_uri' => $this->infoAmbientes['producao']['pix_url_base'],
-            'timeout'  => 5
+            'timeout'  => 5,
+            'handler'  => $handler
         ]);
+
         $this->modo = self::MODO_PRODUCAO;
     }
 
@@ -92,10 +107,24 @@ class Client
     private function inicializar(): void
     {
         $this->infoAmbientes = json_decode(file_get_contents(__DIR__ . '/info-ambientes.json'), true);
+        $handler = new OauthHandler(
+            $this->caminhoArquivoCertificado,
+            $this->clientId,
+            $this->clientSecret,
+            $this->cache,
+            $this->infoAmbientes['homologacao']['pix_url_auth']
+        );
+
+        $stack = HandlerStack::create();
+        $stack->push(Middleware::mapRequest($handler));
+
         $this->httpClient    = new \GuzzleHttp\Client([
             'base_uri' => $this->infoAmbientes['homologacao']['pix_url_base'],
-            'timeout'  => 5
+            'timeout'  => 5,
+            'cert'     => $this->caminhoArquivoCertificado,
+            'handler'  => $stack
         ]);
+
         $this->modo = self::MODO_HOMOLOGACAO;
     }
 
@@ -104,62 +133,9 @@ class Client
         return $this->modo === self::MODO_PRODUCAO;
     }
 
-    /**
-     * @return AccessTokenInterface
-     * @throws BuscaAccessTokenException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    private function buscaAccessToken(): AccessToken
+    public function buscaDadosCobranca(string $chaveCobranca): array
     {
-        /** @var ItemInterface $item */
-        $item = $this->cache->getItem('gerencianet-pix-client-access-token');
-
-        if (is_null($item->get())) {
-            $newAccessToken = $this->pedeNovoTokenParaAPI();
-            $item->set($newAccessToken->jsonSerialize());
-            $this->cache->save($item);
-            return $newAccessToken;
-        }
-
-        /** @var AccessToken $accessToken */
-        $accessToken = new AccessToken($item->get());
-
-        if ($accessToken->hasExpired()) {
-            $newAccessToken = $this->pedeNovoTokenParaAPI();
-            $item->set($newAccessToken->jsonSerialize());
-            $this->cache->save($item);
-            return $newAccessToken;
-        }
-
-        return $accessToken;
-    }
-
-    /**
-     * @return AccessToken
-     * @throws BuscaAccessTokenException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    private function pedeNovoTokenParaAPI(): AccessToken
-    {
-        try {
-            $response = $this->httpClient->request('POST', $this->infoAmbientes[$this->modo]['pix_url_auth'], [
-                'json' => [
-                    'grant_type' => 'client_credentials'
-                ],
-                'auth' => [
-                    $this->clientId,
-                    $this->clientSecret
-                ],
-                'cert' => $this->caminhoArquivoCertificado
-            ]);
-
-            $accessToken = new AccessToken(
-                json_decode($response->getBody()->getContents(), true)
-            );
-
-            return $accessToken;
-        } catch (\Exception $exception) {
-            throw new BuscaAccessTokenException($exception->getMessage());
-        }
+        $response = $this->httpClient->request('GET', 'cob/' . $chaveCobranca);
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
