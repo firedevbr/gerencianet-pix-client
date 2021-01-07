@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b722000d216fa1ded182a8117922d280",
+    "content-hash": "808be07269d628b344039f2cb3fe759a",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -336,6 +336,197 @@
                 "random"
             ],
             "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "php-extended/php-domain-interface",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-domain-interface.git",
+                "reference": "5361ca0530e9487f0f5f8491e6bf75eeb955cc11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-domain-interface/repository/archive.zip?sha=5361ca0530e9487f0f5f8491e6bf75eeb955cc11",
+                "reference": "5361ca0530e9487f0f5f8491e6bf75eeb955cc11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=1",
+                "php-extended/polyfill-php80-stringable": "^1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Domain\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastazor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A library to manipulate domain names",
+            "homepage": "https://gitlab.com/php-extended/php-domain-interface",
+            "keywords": [
+                "domain",
+                "interface",
+                "name",
+                "php",
+                "specification"
+            ],
+            "time": "2021-01-01T18:22:31+00:00"
+        },
+        {
+            "name": "php-extended/php-domain-object",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-domain-object.git",
+                "reference": "e2937bcf454d8b3302c0d4f98345fba27bbaa05f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-domain-object/repository/archive.zip?sha=e2937bcf454d8b3302c0d4f98345fba27bbaa05f",
+                "reference": "e2937bcf454d8b3302c0d4f98345fba27bbaa05f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/php-domain-interface": "^3"
+            },
+            "require-dev": {
+                "php-extended/placeholder-phpunit": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Domain\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A library that implements the php-extended/php-domain-interface library",
+            "homepage": "https://gitlab.com/php-extended/php-domain-object",
+            "keywords": [
+                "domain",
+                "implementation",
+                "object",
+                "php"
+            ],
+            "time": "2021-01-03T13:23:57+00:00"
+        },
+        {
+            "name": "php-extended/php-http-message-psr7",
+            "version": "3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-http-message-psr7.git",
+                "reference": "9cc2363189b91ab7289e07687ab21feea88f8780"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-http-message-psr7/repository/archive.zip?sha=9cc2363189b91ab7289e07687ab21feea88f8780",
+                "reference": "9cc2363189b91ab7289e07687ab21feea88f8780",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/php-domain-object": ">=3",
+                "php-extended/polyfill-php80-stringable": ">=1",
+                "psr/http-message": "^1"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "php-extended/placeholder-phpunit": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\HttpMessage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "Another implementation of the psr7 : php-fig/http-message interface library",
+            "homepage": "https://gitlab.com/php-extended/php-http-message-psr7",
+            "keywords": [
+                "http",
+                "message",
+                "psr7",
+                "stream"
+            ],
+            "time": "2021-01-03T14:24:09+00:00"
+        },
+        {
+            "name": "php-extended/polyfill-php80-stringable",
+            "version": "1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/polyfill-php80-stringable.git",
+                "reference": "2f2628514f4102a313db41664f9eb31c9c6eec90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fpolyfill-php80-stringable/repository/archive.zip?sha=2f2628514f4102a313db41664f9eb31c9c6eec90",
+                "reference": "2f2628514f4102a313db41664f9eb31c9c6eec90",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A polyfill that adds the stringable interface added in php8.0 to previous versions of php",
+            "homepage": "https://gitlab.com/php-extended/polyfill-php80-stringable",
+            "keywords": [
+                "php",
+                "php8",
+                "polyfill",
+                "stringable"
+            ],
+            "time": "2021-01-01T18:06:21+00:00"
         },
         {
             "name": "psr/cache",

@@ -19,6 +19,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.2",
     "league/oauth2-client": "^2.6",
-    "symfony/cache": "^5.2"
+    "symfony/cache": "^5.2",
+    "php-extended/php-http-message-psr7": "^3.2"
   }
 }
